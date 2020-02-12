@@ -1,0 +1,34 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+<div class="container col-md-6">
+    <div class="card">
+        <div class="card-header text-center">
+            <h2>Dimensiones</h2>
+        </div>
+        <div class="card-body">
+            <form action="/tabla" method="POST">
+                <div class="form-group text-center">
+                    <label for="filas" class=""><b>Filas:</b></label>
+                    <input type="text" class="form-control col-md-4 offset-md-4" id="filas" name="filas">
+                    <br>
+                    <br>
+                    <label for="cols" class=""><b>Columnas:</b></label>
+                    <input type="text" class="form-control col-md-4 offset-md-4" id="columnas" name="columnas">
+                    <button class="btn btn-success mt-2" type="submit">Generar</button>
+                </div>
+
+            </form>
+        </div>
+    </div>
+
+</div>
+
+
+
+{% endblock %}
+
+
+<script type="text/javascript">
+
+</script>

@@ -1,0 +1,35 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+<div class="container col-md-6 offset-md-3 text-center">
+    <div class="card">
+        <div class="card-header">
+            <h2><b>Tablero</b></h2>
+        </div>
+        <div class="card-body">
+            {% for f in filas %}
+            {% for c in columnas %}
+            <div class="alert alert-dark mr-2  col-md-{{columnas}} float-left" onclick="changeAgente(this)"
+                id="{{f}},{{c}}"></div>
+            {% endfor %}
+            <br>
+            <br><b></b>
+            {% endfor %}
+
+            <br><br>
+            <form>
+                <div class="form-group">
+                    <input type="radio" id="agente" name="elements" value="agente">
+                    <label for="agente">Agente</label><br>
+                    <input type="radio" id="meta" name="elements" value="meta">
+                    <label for="meta">Meta</label><br>
+                    <input type="radio" id="pared" name="elements" value="pared">
+                    <label for="pared">Pared</label> 
+                </div>
+            </form>
+
+        </div>
+    </div>
+</div>
+
+{% endblock %}
