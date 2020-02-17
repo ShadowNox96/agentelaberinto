@@ -1,35 +1,42 @@
 {% extends 'layout.html' %}
 
 {% block content %}
-<div class="container col-md-6 offset-md-3 text-center">
+<div onload="start()" class="container col  mt-2 text-center" >
     <div class="card">
         <div class="card-header">
-            <h2><b>Tablero</b></h2>
+            <h2 ><b>Tablero</b></h2>
         </div>
-        <div class="card-body">
+        <div class="card-body text-center">
             {% for f in filas %}
             {% for c in columnas %}
-            <div class="alert alert-dark mr-2  col-md-{{columnas}} float-left" onclick="changeAgente(this)"
-                id="{{f}},{{c}}"></div>
+            <div class="alert alert-dark mr-4  col-md-1 float-left" onclick="changeAgente(this)"
+                id="{{c}},{{f}}" style="background-color: rgb(209, 209, 209);"></div>
             {% endfor %}
             <br>
-            <br><b></b>
+            <br>
             {% endfor %}
 
             <br><br>
             <form>
                 <div class="form-group">
+                    <h1 class="tx" hidden>{{tx}}</h1>
+                    <h1 class="ty" hidden>{{ty}}</h1>
                     <input type="radio" id="agente" name="elements" value="agente">
                     <label for="agente">Agente</label><br>
                     <input type="radio" id="meta" name="elements" value="meta">
                     <label for="meta">Meta</label><br>
                     <input type="radio" id="pared" name="elements" value="pared">
                     <label for="pared">Pared</label> 
+                    <div class="alert alert-success" onclick="mover()">Mover</div>
                 </div>
+                <a href="/" class="btn btn-secondary">Limpiar</a>
             </form>
 
         </div>
     </div>
 </div>
+<script>
+    localStorage.removeItem('matriz')
+</script>
 
 {% endblock %}

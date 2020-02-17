@@ -16,9 +16,12 @@ def generaTabla():
     if request.method == 'POST':
         filas = int(request.form['filas'])
         columnas = int(request.form['columnas'])
+        tx=columnas
+        ty=filas
         filas = range(filas)
         columnas = range(columnas)
-    return render_template('tabla.html', columnas=columnas, filas= filas)
+        
+    return render_template('tabla.html', columnas=columnas, filas= filas, ty=ty, tx=tx)
 
 
 
