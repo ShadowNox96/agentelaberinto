@@ -64,6 +64,7 @@ function changeAgente(x) {
 
     }
 }
+
 function mover(){
        eje= setInterval(moverNorte,time2); 
 }
@@ -179,9 +180,6 @@ function MoverIzquierda(x, y) {
 }
 
 function MoverNorte2(x, y) {
-    console.log(rgb)
-    console.log(rgbant)
-    
     //Movimiento hacia arriba
     if (y-1 != -1) {
         //Verifico si es el mismo id que la meta
@@ -277,7 +275,7 @@ function MoverIzquierda2(x, y) {
             console.log(idAgente)
         } else{
             avaluo+=1;
-            if(avaluo==4){
+            if(avaluo<=4){
                 rgb = rgb-10;
                 rgbant = rgb;
                 
@@ -285,7 +283,7 @@ function MoverIzquierda2(x, y) {
             }
         }
     }else{
-        if(avaluo==4){
+        if(avaluo<=4){
             rgb = rgb-10;
             rgbant = rgb;
             
