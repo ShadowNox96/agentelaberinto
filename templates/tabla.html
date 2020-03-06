@@ -1,16 +1,16 @@
 {% extends 'layout.html' %}
 
 {% block content %}
-<div onload="start()" class="container col  mt-2 text-center" >
+<div onload="start()" class="container col  mt-2 text-center">
     <div class="card">
         <div class="card-header">
-            <h2 ><b>Tablero</b></h2>
+            <h2><b>Tablero</b></h2>
         </div>
         <div class="card-body text-center">
             {% for f in filas %}
             {% for c in columnas %}
-            <div class="col alert alert-dark mr-4  col-md-1 float-left" onclick="changeAgente(this)"
-                id="{{c}},{{f}}" style="background-color: rgb(209, 209, 209);"></div>
+            <div class="col alert alert-dark mr-4  col-md-1 float-left" onclick="changeAgente(this)" id="{{c}},{{f}}"
+                style="background-color: rgb(209, 209, 209);"></div>
             {% endfor %}
             <br>
             <br>
@@ -26,7 +26,7 @@
                     <input type="radio" id="meta" name="elements" value="meta">
                     <label for="meta">Meta</label><br>
                     <input type="radio" id="pared" name="elements" value="pared">
-                    <label for="pared">Pared</label> 
+                    <label for="pared">Pared</label>
                     <div class="alert alert-success" onclick="mover()">Mover</div>
                 </div>
                 <a href="/" class="btn btn-secondary">Limpiar</a>
@@ -37,6 +37,45 @@
 </div>
 <script>
     localStorage.removeItem('matriz')
+    //Movimiento del agente
+    window.onload = function () {
+        document.onkeypress = mostrarInfoTecla;
+    }
+
+    function mostrarInfoTecla(evObject) {
+        
+        xM = parseInt(idMeta.split(",")[0]);
+        yM = parseInt(idMeta.split(",")[1]);
+        var teclaPulsada = evObject.keyCode;
+        if (teclaPulsada == 119 && matriz2[yM - 1][xM] != pared2) {
+            document.getElementById((xM) + "," + (yM - 1)).style.backgroundColor = "rgb(115, 255, 0)"
+            document.getElementById(xM + "," + yM).style.backgroundColor = "rgb(209, 209, 209)"
+            matriz2[yM][xM] = 0;
+            matriz2[yM - 1][xM] = meta2;
+            idMeta = xM + "," + (yM - 1);
+        } else if (teclaPulsada == 100 && matriz2[yM][xM + 1] != pared2) {
+            document.getElementById((xM + 1) + "," + (yM)).style.backgroundColor = "rgb(115, 255, 0)"
+            document.getElementById(xM + "," + yM).style.backgroundColor = "rgb(209, 209, 209)"
+            matriz2[yM][xM] = 0;
+            matriz2[yM][xM + 1] = meta2;
+            idMeta = (xM + 1) + "," + yM;
+        } else if (teclaPulsada == 97 && matriz2[yM][xM - 1] != pared2) {
+            document.getElementById((xM - 1) + "," + (yM)).style.backgroundColor = "rgb(115, 255, 0)"
+            document.getElementById(xM + "," + yM).style.backgroundColor = "rgb(209, 209, 209)"
+            matriz2[yM][xM] = 0;
+            matriz2[yM][xM - 1] = meta2;
+            idMeta = (xM - 1) + "," + yM;
+        } else if (teclaPulsada == 115 && matriz2[yM + 1][xM] != pared2) {
+            document.getElementById((xM) + "," + (yM + 1)).style.backgroundColor = "rgb(115, 255, 0)"
+            document.getElementById(xM + "," + yM).style.backgroundColor = "rgb(209, 209, 209)"
+            matriz2[yM][xM] = 0;
+            matriz2[yM + 1][xM] = meta2;
+            idMeta = xM + "," + (yM + 1);
+        }
+        //inc =0;
+
+
+    }
 </script>
 
 {% endblock %}

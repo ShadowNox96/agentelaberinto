@@ -8,6 +8,8 @@ let me = 0;
 let tx = 0;
 let ty = 0;
 var rgb = 160;
+var xM = 0;
+var yM = 0;
 var rgbant =160;
 var avaluo=0;
 var value = true;
@@ -17,7 +19,8 @@ var py =0;
 var matriz2
 var pared2 = 988;
 var meta2 = 999;
-var i =0;
+var inc =0;
+var primera =0;
 var PF = require('pathfinding');
 
 function changeAgente(x) {
@@ -108,8 +111,8 @@ function changeAgente(x) {
 
 function mover(){
     console.log(matriz2)
-    eje = setInterval(iniciar,500); 
-    he=setInterval(MoverHeuristico,500); 
+    eje = setInterval(iniciar,1000); 
+    he=setInterval(MoverHeuristico,1000); 
 }
 
 function iniciar(){
@@ -249,42 +252,57 @@ function MoverDerecha(x,y){
     matriz2[y][x]+=1;
 }
 
+//Movimiento del agente heuristico A*
 function MoverHeuristico(){
+    
     var xinit = parseInt(idAgente2.split(",")[0]);
     var yinit = parseInt(idAgente2.split(",")[1]);
     var xid1 = parseInt(idAgente.split(",")[0]);
     var yid1 = parseInt(idAgente.split(",")[1]);
     var xMeta = parseInt(idMeta.split(",")[0]);
     var yMeta = parseInt(idMeta.split(",")[1]);
+    //Instancia de la matriz en la cual se va a calcular.
     var grid = new PF.Grid(tx,ty);
     var finder = new PF.AStarFinder();
+
+    //Meto los lugares que no son visitables
     grid.setWalkableAt(xMeta, yMeta, true);
+    
+    //Meto los lugares que no son visitables
     grid.setWalkableAt(xid1, yid1, true);
 
+    //Bucle para que las paredes se metan al grid
     for(var i =0; i< tx; i++){
         for(var j=0; j<ty; j++){
+
             if(matriz2[j][i] == pared2){
+                //lugares no transitables
                 grid.setWalkableAt(i,j,false);
             }
         }
     }
     var path = finder.findPath(xinit, yinit, xMeta, yMeta, grid);
-    console.log(path)
+    
+    //Me retorna un path que es la lista de lugares que se tiene que mover el agente y se lo mando al movimiento
     MoverAgenteHeuristico(path);
     
 }
 
 function MoverAgenteHeuristico(path){
-    if(i+1 < path.length){
-            //Moverser
-        document.getElementById((path[i+1][0]) + "," + (path[i+1][1])).style.backgroundColor = "rgb(0, 153, 255)"
+    if(inc+1 < path.length){
+        //Moverser
+        document.getElementById((path[inc+1][0]) + "," + (path[inc+1][1])).style.backgroundColor = "rgb(0, 153, 255)"
         //Vuelvo color gris la anterior
-        document.getElementById(path[i][0] + "," + path[i][1]).style.backgroundColor = "rgb(209, 209, 209)"
-        i+=1;
+        document.getElementById(path[inc][0] + "," + path[inc][1]).style.backgroundColor = "rgb(209, 209, 209)"
+        
+        idAgente2 = (path[0][0]) + "," + (path[0][1]);
+        
+        inc+=1;
     }else{
-        clearInterval(he)
+        clearInterval(he);
         alert('You Lose!!')
     }
+    
     
     
 }
