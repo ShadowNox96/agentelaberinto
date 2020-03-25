@@ -9,5 +9,7 @@ COMO PODER EJECUTARLO
 - Abrir una terminal en la direccion donde se encuentre el archivo app.py
 - Ejecutamos el archivo con la siguiente instruccion
   - python app.py
+- Levantara un servidor en localhost:5000 accesible desde cualquier navegador
+
   
  
