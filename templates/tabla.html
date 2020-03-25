@@ -6,11 +6,11 @@
         <div class="card-header">
             <h2><b>Tablero</b></h2>
         </div>
-        <div class="card-body text-center">
+        <div class="card-body text-center" style="align-items: center;">
             {% for f in filas %}
             {% for c in columnas %}
-            <div class="col alert alert-dark mr-4  col-md-1 float-left" onclick="changeAgente(this)" id="{{c}},{{f}}"
-                style="background-color: rgb(209, 209, 209);"></div>
+            <div  class="col alert alert-dark mr-4  col-md-1 float-left"  onclick="changeAgente(this)" id="{{c}},{{f}}"
+                style="background-color: rgb(209, 209, 209); width: 10px; "></div>
             {% endfor %}
             <br>
             <br>
@@ -72,7 +72,7 @@
             matriz2[yM + 1][xM] = meta2;
             idMeta = xM + "," + (yM + 1);
         }
-        //inc =0;
+        inc =0;
 
 
     }

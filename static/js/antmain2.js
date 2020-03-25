@@ -70,7 +70,7 @@ function changeAgente(x) {
         if (ag == 0) {
             //Verifico si esa posicion ya tiene un agente para ver si lo quer quitar
             //Si no tiene pone el agente y alamaceno el id
-            x.style.background = "rgb(0, 153, 255)";
+            x.style.background = "rgb(0, 160, 255)";
             idAgente = x.id;
             
             ag = 1;
@@ -111,8 +111,8 @@ function changeAgente(x) {
 
 function mover(){
     console.log(matriz2)
-    eje = setInterval(iniciar,1000); 
-    he=setInterval(MoverHeuristico,1000); 
+    eje = setInterval(iniciar,800); 
+    he=setInterval(MoverHeuristico,800); 
 }
 
 function iniciar(){
@@ -216,7 +216,7 @@ function iniciar(){
 
 function MoverArriba(x,y){
     //Moverser
-    document.getElementById((x) + "," + (y-1)).style.backgroundColor = "rgb(0, 153, 255)"
+    document.getElementById((x) + "," + (y-1)).style.backgroundColor = "rgb(0, 160, 255)"
     //Vuelvo color gris la anterior
     document.getElementById(x + "," + y).style.backgroundColor = "rgb(" + rgb + "," + rgb + "," + rgb + ")"
     idAgente = (x) + "," + (y-1) 
@@ -227,7 +227,7 @@ function MoverArriba(x,y){
 
 function MoverIzquierda(x,y){
     //Moverser
-    document.getElementById((x-1) + "," + (y)).style.backgroundColor = "rgb(0, 153, 255)"
+    document.getElementById((x-1) + "," + (y)).style.backgroundColor = "rgb(0, 160, 255)"
     //Vuelvo color gris la anterior
     document.getElementById(x + "," + y).style.backgroundColor = "rgb(" + rgb + "," + rgb + "," + rgb + ")"
     idAgente = (x-1) + "," + (y) 
@@ -237,7 +237,7 @@ function MoverIzquierda(x,y){
 
 function MoverAbajo(x,y){
     //Moverser
-    document.getElementById((x) + "," + (y+1)).style.backgroundColor = "rgb(0, 153, 255)"
+    document.getElementById((x) + "," + (y+1)).style.backgroundColor = "rgb(0, 160, 255)"
     //Vuelvo color gris la anterior
     document.getElementById(x + "," + y).style.backgroundColor = "rgb(" + rgb + "," + rgb + "," + rgb + ")"
     idAgente = (x) + "," + (y+1) 
@@ -245,7 +245,7 @@ function MoverAbajo(x,y){
 }
 function MoverDerecha(x,y){
     //Moverser
-    document.getElementById((x+1) + "," + (y)).style.backgroundColor = "rgb(0, 153, 255)"
+    document.getElementById((x+1) + "," + (y)).style.backgroundColor = "rgb(0, 160, 255)"
     //Vuelvo color gris la anterior
     document.getElementById(x + "," + y).style.backgroundColor = "rgb(" + rgb + "," + rgb + "," + rgb + ")"
     idAgente = (x+1) + "," + (y) 
@@ -254,6 +254,15 @@ function MoverDerecha(x,y){
 
 //Movimiento del agente heuristico A*
 function MoverHeuristico(){
+    for(var i =0; i< tx;i++){
+        for(var j =0; j<ty;j++){
+            console.log(document.getElementById(i+ "," + j).style.backgroundColor)
+            if(document.getElementById(i+ "," + j).style.backgroundColor == "rgb(0, 153, 255)"){
+                document.getElementById(i+ "," + j).style.backgroundColor = "rgb(209, 209, 209)"
+            }
+            
+        }
+    }
     
     var xinit = parseInt(idAgente2.split(",")[0]);
     var yinit = parseInt(idAgente2.split(",")[1]);
@@ -274,10 +283,12 @@ function MoverHeuristico(){
     //Bucle para que las paredes se metan al grid
     for(var i =0; i< tx; i++){
         for(var j=0; j<ty; j++){
-
+            
             if(matriz2[j][i] == pared2){
                 //lugares no transitables
                 grid.setWalkableAt(i,j,false);
+            }else {
+                grid.setWalkableAt(i,j,true);
             }
         }
     }
@@ -294,8 +305,10 @@ function MoverAgenteHeuristico(path){
         document.getElementById((path[inc+1][0]) + "," + (path[inc+1][1])).style.backgroundColor = "rgb(0, 153, 255)"
         //Vuelvo color gris la anterior
         document.getElementById(path[inc][0] + "," + path[inc][1]).style.backgroundColor = "rgb(209, 209, 209)"
+        if(idAgente2 == (path[inc][0] + "," + path[inc][1])){
+            idAgente2 = path[inc+1][0] + "," + path[inc+1][1]
+        }
         
-        idAgente2 = (path[0][0]) + "," + (path[0][1]);
         
         inc+=1;
     }else{
